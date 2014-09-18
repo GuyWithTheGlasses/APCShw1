@@ -1,0 +1,7 @@
+public class Greeter {
+    public static void main greet() {
+	System.out.println("Hello world!");
+    }
+}
+
+/* blah blah edit blah blah */
