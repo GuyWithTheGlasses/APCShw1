@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 
 import java.io.*;
 import java.util.*;
+=======
+//import java.io.*;           why this no workkkk
+//import java.util.*;
+
+>>>>>>> ec878f9130e69b480820b3c79149b4a9e5321062
 
 public class Greeter {
     // We put the attributes here
@@ -28,9 +34,15 @@ public class Greeter {
 	
 	ungreet();
     }
+<<<<<<< HEAD
 
     private void ungreet() {
 	System.out.println("I'm out.");
     }
 
+=======
+    public void ungreet() {
+	System.out.println("I'm out.");
+    }
+>>>>>>> ec878f9130e69b480820b3c79149b4a9e5321062
 }
