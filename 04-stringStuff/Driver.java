@@ -16,13 +16,18 @@ public boolean mixStart(String str) {
     }
 
 }
+/* 
+Strings are immutable - they cannot be changed. 
+String s1 = "hello"; makes s1 point to hello
+s1 = s1.toUpperCase would create a new string, "HELLO" - it doesn't change s1.
+*/
 
 /*-------------------------------------------------------------------------*/
 // makeOutWord
 
 public String makeOutWord(String out, String word) {
   String s1 = out.substring(0,2);
-  String s2 = out.substring(2,4);
+  String s2 = out.substring(2);
   String s3 = s1 + word + s2;
   return s3;
 }
