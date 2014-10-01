@@ -1,0 +1,15 @@
+public String frontTimes(String str, int n) {
+    String front = "";
+    String org = "";
+    if (str.length() < 3) {
+	front = str;
+    }
+    else {
+	front = str.substring(0,3);
+    }
+    while (n > 0) {
+	org = org + front;
+	n = n - 1;
+    }
+    return org;   
+}
