@@ -54,5 +54,44 @@ public class Shapes {
 
 	return org;
     }
+
+    public String tri3(int h){
+	String org = "";
+	int current = 0;
+	//current = 1 + current*2
+	while(current < h){
+	    int space;
+	    for(space=0;space<h-current;space++){
+		org = org + " ";
+	    }
+	    for( ;space<h+current;space++){
+		org = org + "*";
+	    }
+	    current = current + 1;
+	    org = org + "\n";
+	}
+    }
 	
 }
+
+/* tri1 with a for loop
+public string tri1(int h){
+    int i = 0;
+    for (i=0,
+
+tri2 with a for loop
+public string tri2(int height){
+    int h;
+    String s = "";
+    for(h=1;h<=height;h++){
+    int i = 0;
+         for(i=0;i<height-h;i++){
+	      s = s + " ";
+	      }
+	 for(h=0;i<h;i++){
+	 s = s + "*";
+	 }
+	 s = s + "\n";
+	 }
+}
+*/
