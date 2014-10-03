@@ -58,40 +58,67 @@ public class Shapes {
     public String tri3(int h){
 	String org = "";
 	int current = 0;
-	//current = 1 + current*2
-	while(current < h){
+
+	while(current <= h){
 	    int space;
-	    for(space=0;space<h-current;space++){
+	    for(space=0 ; space< h-current ; space++){
 		org = org + " ";
 	    }
-	    for( ;space<h+current;space++){
+	    for( ; space < h+current-1 ; space++){
 		org = org + "*";
 	    }
 	    current = current + 1;
 	    org = org + "\n";
 	}
+
+	return org;
     }
 	
+    public String diamond(int h){
+	String org = "";
+	int currow = 0;
+	int refrow = 0;
+	while(refrow < h){
+	    int space;
+	    for(space=0;space < h-currow-1;space++){
+		org = org + " ";
+	    }
+	    for( ;space <= h+currow-1 ; space++){
+		org = org + "*";
+	    }
+	    if(refrow < h/2){
+		currow = currow + 1;
+	    }
+	    else{
+		currow = currow - 1;
+	    }
+	    org = org + "\n";
+	    refrow = refrow + 1;
+	}
+	return org;
+
+    }
+
+    public String tri4(int h){
+	String org = "";
+	int row = 0;
+	int star = h;
+	
+	while(row < h){
+	    int space;
+	    for(space=0;space<h-star;space++){
+		org = org + " ";
+	    }
+	    for( ;space<h;space++){
+		org = org + "*";
+	    }
+	    row = row + 1;
+	    star = star - 1;
+	    org = org + "\n";
+	}
+
+	return org;
+    }
+
 }
 
-/* tri1 with a for loop
-public string tri1(int h){
-    int i = 0;
-    for (i=0,
-
-tri2 with a for loop
-public string tri2(int height){
-    int h;
-    String s = "";
-    for(h=1;h<=height;h++){
-    int i = 0;
-         for(i=0;i<height-h;i++){
-	      s = s + " ";
-	      }
-	 for(h=0;i<h;i++){
-	 s = s + "*";
-	 }
-	 s = s + "\n";
-	 }
-}
-*/
