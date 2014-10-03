@@ -61,7 +61,7 @@ public class Shapes {
 
 	while(current <= h){
 	    int space;
-	    for(space=0 ; space< h-current ; space++){
+	    for(space=0 ; space < h-current ; space++){
 		org = org + " ";
 	    }
 	    for( ; space < h+current-1 ; space++){
@@ -121,4 +121,18 @@ public class Shapes {
     }
 
 }
+
+/* The real cheesy answer:
+int numstars = 1;
+for(int i = 0;i<numstars;i++){
+     s = s + "*";
+     }
+
+Just add 2 stars to each row, or subtract 1 for the 
+number of spaces. WOWE MUCH EZ
+
+We can also make a private (or public) method that has
+all the elements that are common among all the methods.
+This is known as refactoring.
+*/
 
