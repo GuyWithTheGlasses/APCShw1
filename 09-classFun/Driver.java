@@ -12,14 +12,32 @@ public class Driver {
 	//m2 = b1;
 	//m2 = w1;
 
-	b2 = m1;
-	b2 = m2;
+	b1 = m1;
+	b1 = m2;
 	b2 = new Warrior();
 
 	System.out.println(b2.getHealth());
 	System.out.println(m2.getManna());
-	//System.out.println(b2.getManna());
+	//System.out.println(b1.getManna());
+
+	w1.setName("Groo");
+	m1.setName("Harry");
+	w1.attack(m1);
+	m1.attack(w1);
 
     }
-
 }
+/* Looks like a variable of a superclass can be assigned to an instance of its 
+subclass, but a variable of a subclass can't point to an instance of the
+superclass.
+You can't directly call the methods in the subclass from the basechar. 
+You gotta do something like this, called casting:
+((Mage)c2).getManna();
+Tells Java to treat a variable of one type as another type. 
+
+Basechar c;
+(Mage)c means "treat c as a mage for this line"
+
+However, the dot takes precedence over the casting operator, so we need extra
+parentheses to make this code work. 
+*/
