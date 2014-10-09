@@ -6,7 +6,7 @@ public class Driver {
 
 	b1 = new Basechar();
 	w1 = new Warrior();
-	m1 = new Mage("Gandolf",420000;
+	m1 = new Mage("Gandolf",420000);
 
 	m2 = m1;
 	//m2 = b1;
@@ -25,7 +25,8 @@ public class Driver {
 
     }
 }
-/* Looks like a variable of a superclass can be assigned to an instance of its 
+/* 
+Looks like a variable of a superclass can be assigned to an instance of its 
 subclass, but a variable of a subclass can't point to an instance of the
 superclass.
 You can't directly call the methods in the subclass from the basechar. 
@@ -39,3 +40,4 @@ Basechar c;
 However, the dot takes precedence over the casting operator, so we need extra
 parentheses to make this code work. 
 */
+
