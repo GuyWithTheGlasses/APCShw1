@@ -3,14 +3,6 @@ public class Basechar {
     private int health=20;
     public String name;
 
-    /*public Basechar(String s){
-	setName(s);
-    }
-    public Basechar(){
-	setName("Default");
-    }
-    */
-
     public String toString(){
 	return getName();
     }

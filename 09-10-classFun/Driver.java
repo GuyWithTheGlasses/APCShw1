@@ -6,7 +6,7 @@ public class Driver {
 
 	b1 = new Basechar();
 	w1 = new Warrior();
-	m1 = new Mage();
+	m1 = new Mage("Gandolf",420000;
 
 	m2 = m1;
 	//m2 = b1;
@@ -20,8 +20,6 @@ public class Driver {
 	System.out.println(m2.getManna());
 	//System.out.println(b1.getManna());
 
-	w1.setName("Groo");
-	m1.setName("Harry");
 	w1.attack(m1);
 	m1.attack(w1);
 
