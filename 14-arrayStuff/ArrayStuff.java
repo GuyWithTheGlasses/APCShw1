@@ -60,5 +60,18 @@ public class ArrayStuff{
 	return max;
     }   
 
+    public int freq(int f){
+	int occurence = 0;
+	int number = a[f];
+
+	for(int i = 0 ; i < a.length ; i++){
+	    if(a[i] == number){
+		occurence++;
+	    }
+	}
+
+	return occurence;
+    }
+
 }
 	
