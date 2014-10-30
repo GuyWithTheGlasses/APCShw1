@@ -86,10 +86,7 @@ public class CodingBat{
 
 	/*------------- Harder HW Problems --------------*/
 		    
-	public boolean canBalance(int[] nums) {
-	    int[] split = new int[nums.length];
-	    boolean yeshno = false;
-  
+	public boolean canBalance(int[] nums) {  
 	    int sum1 = 0;
 	    int sum2 = 0;
 	    
@@ -98,37 +95,35 @@ public class CodingBat{
 	    }
   
 	    for(int i = 0 ; i < nums.length ; i++){
-		
-		split[i] = nums[i];
-		sum1 = sum1 + split[i];
+		sum1 = sum1 + nums[i];
 		sum2 = sum2 - nums[i];
 
 		if(sum1 == sum2){
-		    yeshno = true;
+		    return true;
 		}
-		
+
 	    }
     
-	    return yeshno;
+	    return false;
 	}	    
 
-	/*
-	  Idea for seriesUp, doesn't work
+	
+	/* Idea for seriesUp, doesn't work yet */
 
-	  public int[] seriesUp(int n) {
-	  int[] result = new int[(n * (n + 1)) / 2];
-	  int current = 0;
-	  int adder = 1;
-	  while(current < n){
-	  for(int i = 0 ; i < current ; i++){
-	  result[i] = adder;
-	  adder++;
-	  }
-	  current++;
-	  }
-	  return result;
-	  }
-	*/
+	public int[] seriesUp(int n) {
+	    int[] result = new int[(n * (n + 1)) / 2];
+	    int current = 0;
+	    int adder = 1;
+	    while(current < n){
+		for(int i = 0 ; i < current ; i++){
+		    result[i] = adder;
+		    adder++;
+		}
+		current++;
+	    }
+	    return result;
+	}
+	
 
     }
 
