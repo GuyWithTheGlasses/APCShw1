@@ -108,23 +108,43 @@ public class CodingBat{
 	}	    
 
 	
-	/* Idea for seriesUp, doesn't work yet */
-
 	public int[] seriesUp(int n) {
-	    int[] result = new int[(n * (n + 1)) / 2];
+	    int[] result = new int[(n*(n+1)) / 2];
 	    int current = 0;
-	    int adder = 1;
-	    while(current < n){
+	    int index = 0;
+  
+	    while(current <= n){
 		for(int i = 0 ; i < current ; i++){
-		    result[i] = adder;
-		    adder++;
+		    result[index] = i + 1;
+		    index++;
 		}
 		current++;
 	    }
+   
 	    return result;
 	}
-	
 
+	/*  Not working yet
+	
+	    public int maxMirror(int[] nums) {
+	    int mirlength = 0;
+  
+	    int[] reverse = new int[nums.length];
+	    for(int n = 0 ; n < nums.length ; n++){
+		reverse[n] = nums[nums.length - n - 1];
+	    }
+  
+	    for(int i = 0 ; i < nums.length ; i++){
+		int j = 0;
+		while(reverse[i] == nums[j]){
+		    mirlength++;
+		    j++;
+		}
+	    }
+    
+	    return mirlength;      
+	}
+	*/
     }
 
     
