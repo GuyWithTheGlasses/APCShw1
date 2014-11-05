@@ -73,5 +73,19 @@ public class ArrayStuff{
 	return occurence;
     }
 
+    public int mode(){
+	int finalmode = a[0];
+	int modeCount = freq(a[0]);
+	for(int i = 0 ; i < a.length ; i++){
+	    if(freq(a[i]) > modeCount){
+		a[i] = finalmode;
+		modeCount = freq(a[i]);
+	    }
+	}
+	return finalmode;
+    }
+	    
+    
 }
 	
+	    
