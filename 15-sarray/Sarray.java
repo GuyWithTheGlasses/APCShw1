@@ -17,12 +17,13 @@ public class Sarray {
 	    data[last+1] = i;
 	}
 	else{
-	    int[] newdata = new int[data.length + 1];
+	    int[] newdata = new int[data.length + 10];
 	    for(int j = 0 ; j < (newdata.length - 1) ; j++){
 		newdata[j] = data[j];
 	    }
 	    newdata[last+1] = i;
 	}
+	data[] = newdata[];
 	last++;
 	return true;
     }
@@ -30,28 +31,39 @@ public class Sarray {
     public void  add(int index, int i){
 	// adds item i  at index, shifting everything down as needed.
         // also grows as needed 
+	try{
 
-	if(last < (data.length - 1)){
-	    for(int j=(data.length-1) ; j>index ; j=j-1){
-		data[j] = data[j-1];
+	    if(index > data.length){
+		throw new ArrayIndexOutOfBoundsException();
 	    }
-	    data[index] = i;
+
+	    if(last < (data.length - 1)){
+		for(int j=(data.length-1) ; j>index ; j=j-1){
+		    data[j] = data[j-1];
+		}
+		data[index] = i;
+	    }
+	
+	    else{
+		int[] newdata = new int[data.length + 10];
+		for(int k = 0 ; k < newdata.length ; k++){
+		    if(k<index){
+			newdata[k] = data[k];
+		    }
+		    if(k=index){
+			newdata[k] = i;
+		    }
+		    else{
+			newdata[k] = data[k-1];
+		    }
+		}
+	    }
+	    
+	} catch (IndexOutOfBoundsException e) {
+	    System.out.println("Index is greater than length of Sarray; try a smaller number.");
 	}
 	
-	else{
-	    int[] newdata = new int[data.length+1];
-	    for(int k = 0 ; k < newdata.length ; k++){
-		if(k<index){
-		    newdata[k] = data[k];
-		}
-		if(k=index){
-		    newdata[k] = i;
-		}
-		else{
-		    newdata[k] = data[k-1];
-		}
-	    }
-	}
+	data[] = newdata[];
 	
     }
 
