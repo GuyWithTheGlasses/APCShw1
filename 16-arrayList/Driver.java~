@@ -1,0 +1,4 @@
+public class AlTest{
+    public static void main(String[] args){
+	AlTest alt = new alt();
+	

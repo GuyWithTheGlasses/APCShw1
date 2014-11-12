@@ -9,6 +9,16 @@ public class Sarray {
 	last = 0;
     }
 
+    private void indextest(){
+	try{
+	    if(index > data.length){
+		throw new ArrayIndexOutOfBoundsException();
+	    }
+	}catch (IndexOutOfBoundsException e) {
+	    System.out.println("Index is greater than Sarray length, try a smaller number.");
+	}
+    }
+    
     public boolean add(int i){
 	// adds an item to the end of the list, grow if needed
         // returns true
@@ -30,41 +40,33 @@ public class Sarray {
 
     public void  add(int index, int i){
 	// adds item i  at index, shifting everything down as needed.
-        // also grows as needed 
-	try{
+        // also grows as needed
 
-	    if(index > data.length){
-		throw new ArrayIndexOutOfBoundsException();
-	    }
-
-	    if(last < (data.length - 1)){
-		for(int j=(data.length-1) ; j>index ; j=j-1){
-		    data[j] = data[j-1];
-		}
-		data[index] = i;
-	    }
+	indextest();
 	
-	    else{
-		int[] newdata = new int[data.length + 10];
-		for(int k = 0 ; k < newdata.length ; k++){
-		    if(k<index){
-			newdata[k] = data[k];
-		    }
-		    if(k=index){
-			newdata[k] = i;
-		    }
-		    else{
-			newdata[k] = data[k-1];
-		    }
-		}
+	if(last < (data.length - 1)){
+	    for(int j=(data.length-1) ; j>index ; j=j-1){
+		data[j] = data[j-1];
 	    }
-	    
-	} catch (IndexOutOfBoundsException e) {
-	    System.out.println("Index is greater than length of Sarray; try a smaller number.");
+	    data[index] = i;
 	}
 	
+	else{
+	    int[] newdata = new int[data.length + 10];
+	    for(int k = 0 ; k < newdata.length ; k++){
+		if(k<index){
+		    newdata[k] = data[k];
+		}
+		if(k=index){
+		    newdata[k] = i;
+		}
+		else{
+		    newdata[k] = data[k-1];
+		}
+	    }
+	}
+	    
 	data[] = newdata[];
-	
     }
 
     public int size() {
@@ -77,13 +79,17 @@ public class Sarray {
     public int get(int index) {
         // returns the item at location index of the list
 
+	indextest();
+	
 	int location = data[index];
 	return location;
     }
 
     public int set(int index, int i){
         // sets the item at location index to value i
-        // returns the old value 
+        // returns the old value
+
+	indextest();
 	
         int oldval = data[index];
 	data[index] = i;
@@ -93,6 +99,8 @@ public class Sarray {
     public int remove(int index){
         // removes the item at index 
         // returns the old value
+
+	indextest();
 	
 	int removedval = data[index];
 	data[index] = 0;
