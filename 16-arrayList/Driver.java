@@ -3,6 +3,16 @@ import java.util.*;
 
 
 public class Driver{
+
+    public static ArrayList removeconsec(ArrayList x){
+	for(int j = 1 ; j < x.size() ; j++){
+	    if(x.get(j) == x.get(j-1)){
+		x.remove(j);
+	    }
+	}
+	return x;
+    }
+
     public static void main(String[] args){
 	ArrayList<Integer> al = new ArrayList<Integer>();
 	Random rng = new Random();
@@ -10,9 +20,8 @@ public class Driver{
 	    al.add(rng.nextInt(5));
 	}
 
-	public ArrayList removeconsec(ArrayList x){
-	    for(int j = 0 ; j < ArrayList
-	System.out.println(al);
+      	System.out.println(al);
+	System.out.println(removeconsec(al));
 	
     }
 }
