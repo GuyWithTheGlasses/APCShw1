@@ -25,106 +25,118 @@ public class WordSearch{
 	return s;
     }
 
-    public void boundCheck(int row, int col){
-
-	try{
-
-	    if(row < 0 || row > board.length){
-		throw new IndexOutOfBoundsException();
-	    }
-	    if(col < 0 || col > board[row].length){
-		throw new IndexOutOfBoundsException();
-	    }
-
-	} catch (IndexOutOfBoundsException e){}
+    public void check(String word, int row, int col, int direction){
 	
-    }
-    
-    public void overlapCheck(String word, int row, int col){
-		
+	/* 
+	   Direction starts from 0 and rotates by 45 degrees 
+	   counterclockwise for each increase of 1. For example, 2 is the 
+	   upward direction, 5 is down and to the left, etc.
+	*/
 	try{
+	    if(direction < 0 || direction > 7){
+		throw new IllegalArgumentException();
+	    }
+	} catch (IllegalArgumentException e){
+	    System.out.println("Direction must be an int between 0 and 7, inclusive.");
+	}
+	
+	/*
+	  Here we find the "total" length of the word; that is,
+	  the farthest the word extends in its specified direction.
+	  If that extends out of the board, then it's invalid.
+	*/
+	int lencheck = word.length();
+	int hgtcheck = word.length();
+	//Direction checker, will use this a lot in different places
+	if(direction == 0 || direction == 7 || direction == 1){
+	    lencheck = col + lencheck;
+	}
+	if(direction == 2 || direction == 1 || direction == 3){
+	    hgtcheck = row - hgtcheck;
+	}
+	if(direction == 4 || direction == 3 || direction == 5){
+	    lencheck = col - lencheck;
+	}
+	if(direction == 6 || direction == 5 || direction == 7){
+	    hgtcheck = row + hgtcheck;
+	}
+
+	String msg = "";
+	try{
+	    	    
+	    //Checks to see if the word is too long.
+	    if(lencheck < 0 || hgtcheck < 0 || 
+	       lencheck > board.length || hgtcheck > board[row].length){
+		
+		msg = "word being too long.";
+		throw new IndexOutOfBoundsException();
+	    } 
+	    
+	    //Checks to see if the word cannot overlap at some location.
+	    int r = row;
+	    int c = col;
 	    for(int i = 0 ; i < word.length() ; i++){
-		if( board[row][col] == word.charAt(i)
-		    || board[row][col] == '.';
-		    ){}
-		else{ 
-		    throw new IndexOutOfBoundsException();
+		if(board[r][c] == word.charAt(i) ||
+		   board[r][c] == '\0'){
+		    if(direction == 0 || direction == 7 || direction == 1){
+			c++;
+		    }
+		    if(direction == 2 || direction == 1 || direction == 3){
+		        r--;
+		    }
+		    if(direction == 4 || direction == 3 || direction == 5){
+		        c--;
+		    }
+		    if(direction == 6 || direction == 5 || direction == 7){
+		        r++;
+		    }
+		}
+		else{
+		    msg = "word causing improper overlap.";
+		    throw new IndexOutOfBoundsException();		    
 		}
 	    }
-	} catch (IndexOutOfBoundsException e){}
-		    
+	    
+	} catch (IndexOutOfBoundsException e){
+	    System.out.println("Word placement is invalid due to "+msg);
+	} 
+	
+    }	    
 
-    public void addWordH(String w, int row, int col){
-
-	boundCheck(row, col);
-	overlapCheck(word, row, col);
+    public void addWord(String word, int row, int col, int direction){
+	/* 
+	   Direction starts from 0 and rotates by 45 degrees 
+	   counterclockwise for each increase of 1. For example, 2 is the 
+	   upward direction, 5 is down and to the left, etc.
+	*/
+	check(word, row, col, direction);
+	int r = row;
 	int c = col;
-	for(int i = 0 ; i < w.length() ; i++){
-	    board[row][c] = w.charAt(i);
-	    c++;
-	}
-	
-    }
-    
-    /*public void addWordV(String w, int row, int col){
-	
-	boundCheck(row, col);
-	int r = row;
-	for(int i = 0 ; i < w.length() ; i++){
-	    board[r][col] = w.charAt(i);
-	    r++;
-	}
-	
-    }
-
-    public void addWordDownRight(String w, int row, int col){
-	int r = row;
-	int c= col;
-	for(int i = 0 ; i < w.length() ; i++){
-	    board[r][c] = w.charAt(i);
-	    r++;
-	    c++;
+	for(int i = 0 ; i < word.length() ; i++){
+	    board[r][c] = word.charAt(i);
+	    if(direction == 0 || direction == 7 || direction == 1){
+		c++;
+	    }
+	    if(direction == 2 || direction == 1 || direction == 3){
+		r--;
+	    }
+	    if(direction == 4 || direction == 3 || direction == 5){
+		c--;
+	    }
+	    if(direction == 6 || direction == 5 || direction == 7){
+		r++;
+	    }
 	}
     }
-    public void addWordUpRight(String w, int row, int col){
-	int r = row;
-	int c= col;
-	for(int i = 0 ; i < w.length() ; i++){
-	    board[r][c] = w.charAt(i);
-	    r--;
-	    c++;
-	}
-    }
-    public void addWordUpLeft(String w, int row, int col){
-	int r = row;
-	int c= col;
-	for(int i = 0 ; i < w.length() ; i++){
-	    board[r][c] = w.charAt(i);
-	    r++;
-	    c--;
-	}
-    }
-    public void addWordDownLeft(String w, int row, int col){
-	int r = row;
-	int c= col;
-	for(int i = 0 ; i < w.length() ; i++){
-	    board[r][c] = w.charAt(i);
-	    r--;
-	    c--;
-	}
-    }
-    */
     
     public static void main(String[] args){
 	WordSearch w = new WordSearch();
 
-	w.addWordH("hello", 15, 20);
-	//w.addWordH("look", 15, 18); //overlap shouldn't be allowed
-	w.addWordH("look", 15, 23); //legal overlap
-	//w.addWordH("coffee", -3, 25); //out of bounds
-	//w.addWordH("tea", 15, 500); //out of bounds
-	//w.addWordV("cola", 4, 20);
-	//w.addWordDownRight("water", 2, 2);
+	//w.addWord("hello", 15, 20, 0);
+	//w.addWord("look", 15, 18, 0); //overlap shouldn't be allowed
+	//w.addWord("look", 15, 23, 0); //legal overlap
+	//w.addWord("coffee", -3, 25, 4); //out of bounds
+	w.addWord("tea", 15, 20, 8); //direction is not a valid int
 
 	System.out.println(w.toString());
 	
