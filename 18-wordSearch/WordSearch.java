@@ -38,6 +38,7 @@ public class WordSearch{
 	    }
 	} catch (IllegalArgumentException e){
 	    System.out.println("Direction must be an int between 0 and 7, inclusive.");
+	    System.exit(0);
 	}
 	
 	/*
@@ -61,44 +62,47 @@ public class WordSearch{
 	    hgtcheck = row + hgtcheck;
 	}
 
-	String msg = "";
-	try{
-	    	    
-	    //Checks to see if the word is too long.
-	    if(lencheck < 0 || hgtcheck < 0 || 
-	       lencheck > board.length || hgtcheck > board[row].length){
-		
-		msg = "word being too long.";
-		throw new IndexOutOfBoundsException();
-	    } 
-	    
-	    //Checks to see if the word cannot overlap at some location.
-	    int r = row;
-	    int c = col;
-	    for(int i = 0 ; i < word.length() ; i++){
-		if(board[r][c] == word.charAt(i) ||
-		   board[r][c] == '\0'){
-		    if(direction == 0 || direction == 7 || direction == 1){
-			c++;
-		    }
-		    if(direction == 2 || direction == 1 || direction == 3){
-		        r--;
-		    }
-		    if(direction == 4 || direction == 3 || direction == 5){
-		        c--;
-		    }
-		    if(direction == 6 || direction == 5 || direction == 7){
-		        r++;
-		    }
+	//Checks to see if the word overlaps at any place.
+	int r = row;
+	int c = col;
+	boolean overlap = false;
+	for(int i = 0 ; i < word.length() ; i++){
+	    if(board[r][c] == word.charAt(i) ||
+	       board[r][c] == '.'){
+		if(direction == 0 || direction == 7 || direction == 1){
+		    c++;
 		}
-		else{
-		    msg = "word causing improper overlap.";
-		    throw new IndexOutOfBoundsException();		    
+		if(direction == 2 || direction == 1 || direction == 3){
+		    r--;
+		}
+		if(direction == 4 || direction == 3 || direction == 5){
+		    c--;
+		}
+		if(direction == 6 || direction == 5 || direction == 7){
+		    r++;
 		}
 	    }
-	    
+	    else{
+		overlap = true;
+	    }
+	}
+
+	String msg = "";
+	try{	    	   
+	    //Error check to see if word extends out of board.
+	    if(lencheck < 0 || hgtcheck < 0 || 
+	       lencheck > board[row].length || hgtcheck > board.length){
+		msg = "word going out of board.";
+		throw new IndexOutOfBoundsException();
+	    }
+	    //Error check to see if word causes conflict with overlap.
+	    if(overlap){
+		msg = "word causing improper overlap.";
+		throw new IndexOutOfBoundsException();
+	    }    	    
 	} catch (IndexOutOfBoundsException e){
 	    System.out.println("Word placement is invalid due to "+msg);
+	    System.exit(0);
 	} 
 	
     }	    
@@ -132,11 +136,11 @@ public class WordSearch{
     public static void main(String[] args){
 	WordSearch w = new WordSearch();
 
-	//w.addWord("hello", 15, 20, 0);
+	w.addWord("hello", 15, 20, 0);
 	//w.addWord("look", 15, 18, 0); //overlap shouldn't be allowed
 	//w.addWord("look", 15, 23, 0); //legal overlap
 	//w.addWord("coffee", -3, 25, 4); //out of bounds
-	w.addWord("tea", 15, 20, 8); //direction is not a valid int
+	//w.addWord("tea", 15, 20, 8); //direction is not a valid int
 
 	System.out.println(w.toString());
 	
