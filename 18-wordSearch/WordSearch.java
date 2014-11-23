@@ -1,5 +1,8 @@
+import java.util.*;
+
 public class WordSearch{
     private char[][] board;
+    private String errmsg = "";
 
     public WordSearch(int r, int c){
 	board = new char[r][c];
@@ -31,6 +34,9 @@ public class WordSearch{
 	   Direction starts from 0 and rotates by 45 degrees 
 	   counterclockwise for each increase of 1. For example, 2 is the 
 	   upward direction, 5 is down and to the left, etc.
+	   
+	   ***This should no longer ever be an issue, as we now generate the
+	   direction int using a Random.
 	*/
 	try{
 	    if(direction < 0 || direction > 7){
@@ -87,27 +93,23 @@ public class WordSearch{
 	    }
 	}
 
-	String msg = "";
 	try{	    	   
 	    //Error check to see if word extends out of board.
 	    if(lencheck < 0 || hgtcheck < 0 || 
 	       lencheck > board[row].length || hgtcheck > board.length){
-		msg = "word going out of board.";
+		errmsg = "word going out of board.";
 		throw new IndexOutOfBoundsException();
 	    }
 	    //Error check to see if word causes conflict with overlap.
 	    if(overlap){
-		msg = "word causing improper overlap.";
+		errmsg = "word causing improper overlap.";
 		throw new IndexOutOfBoundsException();
 	    }    	    
-	} catch (IndexOutOfBoundsException e){
-	    System.out.println("Word placement is invalid due to "+msg);
-	    System.exit(0);
-	} 
+	} catch (IndexOutOfBoundsException e){} 
 	
     }	    
 
-    public void addWord(String word, int row, int col, int direction){
+    public void addWordAllD(String word, int row, int col, int direction){
 	/* 
 	   Direction starts from 0 and rotates by 45 degrees 
 	   counterclockwise for each increase of 1. For example, 2 is the 
@@ -132,18 +134,24 @@ public class WordSearch{
 	    }
 	}
     }
-    
-    public static void main(String[] args){
-	WordSearch w = new WordSearch();
 
-	w.addWord("hello", 15, 20, 0);
-	//w.addWord("look", 15, 18, 0); //overlap shouldn't be allowed
-	//w.addWord("look", 15, 23, 0); //legal overlap
-	//w.addWord("coffee", -3, 25, 4); //out of bounds
-	//w.addWord("tea", 15, 20, 8); //direction is not a valid int
+    public boolean addWord(String w){
 
-	System.out.println(w.toString());
-	
+	Random rnd = new Random();
+	int c = rnd.nextInt(board.length);
+	int r = rnd.nextInt(board[0].length);
+	int d = rnd.nextInt(8);
+	try{
+	    addWordAllD(w, r, c, d);
+	}catch (IndexOutOfBoundsException e){
+	    System.out.println("Failed to add word "+(w.toUpperCase()) );
+	    return false;
+	}catch (IllegalArgumentException e){
+	    return false;
+	}
+	System.out.println("Added word successfully.");
+	return true;  
+
     }
     
 }
