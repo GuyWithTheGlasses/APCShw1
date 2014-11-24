@@ -1,9 +1,8 @@
-import java.util.*;
+import java.util.Random;
 
 public class WordSearch{
     private char[][] board;
-    private String errmsg = "";
-
+    
     public WordSearch(int r, int c){
 	board = new char[r][c];
 	for(int i = 0 ; i < board.length ; i++){
@@ -97,15 +96,16 @@ public class WordSearch{
 	    //Error check to see if word extends out of board.
 	    if(lencheck < 0 || hgtcheck < 0 || 
 	       lencheck > board[row].length || hgtcheck > board.length){
-		errmsg = "word going out of board.";
 		throw new IndexOutOfBoundsException();
 	    }
 	    //Error check to see if word causes conflict with overlap.
 	    if(overlap){
-		errmsg = "word causing improper overlap.";
-		throw new IndexOutOfBoundsException();
+		throw new IllegalArgumentException();
 	    }    	    
-	} catch (IndexOutOfBoundsException e){} 
+	} catch (IndexOutOfBoundsException e){
+	    
+	} catch (IllegalArgumentException e){}
+	    
 	
     }	    
 
@@ -135,18 +135,20 @@ public class WordSearch{
 	}
     }
 
-    public boolean addWord(String w){
+    public boolean addWord(String word){
 
 	Random rnd = new Random();
+	String w = word.toUpperCase();
 	int c = rnd.nextInt(board.length);
 	int r = rnd.nextInt(board[0].length);
 	int d = rnd.nextInt(8);
 	try{
 	    addWordAllD(w, r, c, d);
 	}catch (IndexOutOfBoundsException e){
-	    System.out.println("Failed to add word "+(w.toUpperCase()) );
+	    System.out.println("Word "+w+" goes out of bounds.");
 	    return false;
 	}catch (IllegalArgumentException e){
+	    System.out.println("Word "+w+" overlaps improperly.");
 	    return false;
 	}
 	System.out.println("Added word successfully.");
