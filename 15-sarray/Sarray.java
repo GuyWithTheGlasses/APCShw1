@@ -25,6 +25,20 @@ public class Sarray {
 	}
     }
 
+    private void order(String s){
+	int count = 0;
+	while(count < data.length){
+	    int test = s.compareTo(data[i]);
+	    if(test > 0){
+		count++;
+	    }
+	    if(test =< 0){
+		data[count] = s;
+		break;
+	    }
+	}
+    }
+
     public String toString(){
 	String printout = "";
 	for(int i = 0 ; i < data.length ; i++){
@@ -36,6 +50,8 @@ public class Sarray {
     public boolean add(String s){
 	// adds an item to the end of the list, grow if needed
 	// returns true
+
+	order(s);
 	
 	if(last < data.length){
 	    data[last] = s;
@@ -67,20 +83,12 @@ public class Sarray {
 	
 	else{
 	    String[] newdata = new String[data.length + 10];
-	    for(int k = 0 ; k < newdata.length ; k++){
-		if(k < index){
-		    newdata[k] = data[k];
-		}
-		if(k == index){
-		    newdata[k] = s;
-		}
-		else{
-		    newdata[k] = data[k-1];
-		}
+	    for(int k = 0 ; k < index ; k++){
+		newdata[k] = data[k];
 	    }
+	    newdata[index] = s;	
 	    data = newdata;
 	}
-	    
     }
 
     public int size() {
@@ -124,8 +132,9 @@ public class Sarray {
     public static void main(String[] args){
 	Sarray sry = new Sarray(1);
 	for(int i = 0 ; i < 10 ; i++){
-	    sry.add("Hello",i);
+	    sry.add("Hello");
 	}
 	System.out.println(sry.toString());
     }
+    
 }
