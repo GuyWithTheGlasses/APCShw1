@@ -1,109 +1,140 @@
 public class Sarray {
-    int[] data;
-    int   last;
+    String[] data;
+    int last;
 
-    public Sarray() {
-	// set up the initial instance variables
-	
-        data = new int[10];
+    public Sarray(int size){
+	//set up initial instance variables
+
+	data = new String[size];
 	last = 0;
     }
 
-    private void indextest(){
+    public Sarray() {
+	// set up the initial instance variables
+
+	this(20);
+    }
+
+    private void indextest(int i){
 	try{
-	    if(index > data.length){
+	    if(i > data.length){
 		throw new ArrayIndexOutOfBoundsException();
 	    }
 	}catch (IndexOutOfBoundsException e) {
 	    System.out.println("Index is greater than Sarray length, try a smaller number.");
 	}
     }
+
+    private void order(String s){
+	int count = 0;
+	while(count < data.length){
+	    int test = s.compareTo(data[i]);
+	    if(test > 0){
+		count++;
+	    }
+	    if(test =< 0){
+		data[count] = s;
+		break;
+	    }
+	}
+    }
+
+    public String toString(){
+	String printout = "";
+	for(int i = 0 ; i < data.length ; i++){
+	    printout = printout + data[i] + ", ";
+	}
+	return printout;
+    }
     
-    public boolean add(int i){
+    public boolean add(String s){
 	// adds an item to the end of the list, grow if needed
-        // returns true
+	// returns true
+
+	order(s);
 	
-	if(last != (data.length - 1)){
-	    data[last+1] = i;
+	if(last < data.length){
+	    data[last] = s;
 	}
 	else{
-	    int[] newdata = new int[data.length + 10];
-	    for(int j = 0 ; j < (newdata.length - 1) ; j++){
+	    String[] newdata = new String[data.length + 10];
+	    for(int j = 0 ; j < data.length ; j++){
 		newdata[j] = data[j];
 	    }
-	    newdata[last+1] = i;
+	    newdata[last] = s;
+	    data = newdata;
 	}
-	data[] = newdata[];
 	last++;
 	return true;
     }
 
-    public void  add(int index, int i){
-	// adds item i  at index, shifting everything down as needed.
-        // also grows as needed
+    public void add(String s, int index){
+	// adds item s  at index, shifting everything down as needed.
+	// also grows as needed
 
-	indextest();
+	indextest(index);
 	
-	if(last < (data.length - 1)){
-	    for(int j=(data.length-1) ; j>index ; j=j-1){
+	if(last < data.length){
+	    for(int j = (data.length-1) ; j > index ; j--){
 		data[j] = data[j-1];
 	    }
-	    data[index] = i;
+	    data[index] = s;
 	}
 	
 	else{
-	    int[] newdata = new int[data.length + 10];
-	    for(int k = 0 ; k < newdata.length ; k++){
-		if(k<index){
-		    newdata[k] = data[k];
-		}
-		if(k=index){
-		    newdata[k] = i;
-		}
-		else{
-		    newdata[k] = data[k-1];
-		}
+	    String[] newdata = new String[data.length + 10];
+	    for(int k = 0 ; k < index ; k++){
+		newdata[k] = data[k];
 	    }
+	    newdata[index] = s;	
+	    data = newdata;
 	}
-	    
-	data[] = newdata[];
     }
 
     public int size() {
 	// returns the number of items in the list (not the array size)
 
-        int numelements = last + 1;
+	int numelements = last + 1;
 	return numelements;
     }
 
-    public int get(int index) {
-        // returns the item at location index of the list
+    public String get(int index) {
+	// returns the item at location index of the list
 
-	indextest();
+	indextest(index);
 	
-	int location = data[index];
+	String location = data[index];
 	return location;
     }
 
-    public int set(int index, int i){
-        // sets the item at location index to value i
-        // returns the old value
+    public String set(int index, String s){
+	// sets the item at location index to value i
+	// returns the old value
 
-	indextest();
+	indextest(index);
 	
-        int oldval = data[index];
-	data[index] = i;
+	String oldval = data[index];
+	data[index] = s;
 	return oldval;
     }
 
-    public int remove(int index){
-        // removes the item at index 
-        // returns the old value
+    public String remove(int index){
+	// removes the item at index 
+	// returns the old value
 
-	indextest();
+	indextest(index);
 	
-	int removedval = data[index];
-	data[index] = 0;
+	String removedval = data[index];
+	data[index] = null;
 	return removedval;
     }
+
+    public static void main(String[] args){
+	Sarray sry = new Sarray(1);
+	for(int i = 0 ; i < 10 ; i++){
+	    sry.add("Hello");
+	}
+	System.out.println(sry.toString());
+    }
+    
 }
