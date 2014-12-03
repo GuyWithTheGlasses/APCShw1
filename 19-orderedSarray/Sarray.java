@@ -25,22 +25,6 @@ public class Sarray {
 	}
     }
 
-    private boolean orderAdd(String s){
-	int count = data.length - 1;
-	while(count >= 0){
-	    int test = s.compareTo(data[count]);
-	    if(test > 0){
-		data[count] = data[count - 1];
-		count--;
-	    }
-	    if(test <= 0){
-		data[count] = s;
-		break;
-	    }
-	}
-	return true;
-    }
-
     public String toString(){
 	String printout = "";
 	for(int i = 0 ; i < data.length ; i++){
