@@ -1,1 +1,2 @@
-Adds words without the spaces filled in, but currently has trouble checking overlap of first/last char of a word.
+Makes a complete word search puzzle, but does not use the Java word database thingy, so you have to enter the wordlist manually
+(which is quite a hassle)
