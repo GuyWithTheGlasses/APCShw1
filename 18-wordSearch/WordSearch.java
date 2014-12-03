@@ -2,7 +2,6 @@ import java.util.*;
 
 public class WordSearch{
     private char[][] board;
-    private String errmsg = "";
 
     public WordSearch(int r, int c){
 	board = new char[r][c];
@@ -68,13 +67,15 @@ public class WordSearch{
 	    hgtcheck = row + hgtcheck;
 	}
 
-	//Checks to see if the word overlaps at any place.
+	//Checks to see if word overlaps at any point
+	boolean overlap = false;
 	int r = row;
 	int c = col;
-	boolean overlap = false;
 	for(int i = 0 ; i < word.length() ; i++){
-	    if(board[r][c] == word.charAt(i) ||
-	       board[r][c] == '.'){
+	    if( 
+	       (board[r][c] == '.') ||
+	       (board[r][c] == word.charAt(i)) 
+		){
 		if(direction == 0 || direction == 7 || direction == 1){
 		    c++;
 		}
@@ -90,19 +91,18 @@ public class WordSearch{
 	    }
 	    else{
 		overlap = true;
+		break;
 	    }
-	}
+	}       
 
 	try{	    	   
 	    //Error check to see if word extends out of board.
 	    if(lencheck < 0 || hgtcheck < 0 || 
 	       lencheck > board[row].length || hgtcheck > board.length){
-		errmsg = "word going out of board.";
 		throw new IndexOutOfBoundsException();
 	    }
 	    //Error check to see if word causes conflict with overlap.
 	    if(overlap){
-		errmsg = "word causing improper overlap.";
 		throw new IndexOutOfBoundsException();
 	    }    	    
 	} catch (IndexOutOfBoundsException e){} 
@@ -118,6 +118,7 @@ public class WordSearch{
 	check(word, row, col, direction);
 	int r = row;
 	int c = col;
+	String w = word.toUpperCase();
 	for(int i = 0 ; i < word.length() ; i++){
 	    board[r][c] = word.charAt(i);
 	    if(direction == 0 || direction == 7 || direction == 1){
@@ -144,7 +145,7 @@ public class WordSearch{
 	try{
 	    addWordAllD(w, r, c, d);
 	}catch (IndexOutOfBoundsException e){
-	    System.out.println("Failed to add word "+(w.toUpperCase()) );
+	    System.out.println("Failed to add word "+w.toUpperCase());
 	    return false;
 	}catch (IllegalArgumentException e){
 	    return false;
