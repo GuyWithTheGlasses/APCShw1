@@ -17,12 +17,20 @@ public class Sarray {
 
     private void indextest(int i){
 	try{
-	    if(i > data.length){
+	    if(i > data.length - 1){
 		throw new ArrayIndexOutOfBoundsException();
 	    }
 	}catch (IndexOutOfBoundsException e) {
 	    System.out.println("Index is greater than Sarray length, try a smaller number.");
 	}
+    }
+
+    public String[] getdata(){
+	return data;
+    }
+
+    public int getlast(){
+	return last;
     }
 
     public String toString(){
@@ -41,7 +49,7 @@ public class Sarray {
 	    data[last] = s;
 	}
 	else{
-	    String[] newdata = new String[data.length + 10];
+	    String[] newdata = new String[data.length + 1];
 	    for(int j = 0 ; j < data.length ; j++){
 		newdata[j] = data[j];
 	    }
@@ -66,7 +74,7 @@ public class Sarray {
 	}
 	
 	else{
-	    String[] newdata = new String[data.length + 10];
+	    String[] newdata = new String[data.length + 1];
 	    for(int k = 0 ; k < index ; k++){
 		newdata[k] = data[k];
 	    }
