@@ -123,7 +123,7 @@ public class Sarray {
 
 
 
-    /*----------------------- Isort --------------------------*/
+    /*------------------------ Isort --------------------------*/
     
     /*
       I used all the same variables that were posted on the HW page.
@@ -152,7 +152,7 @@ public class Sarray {
     }
     
 
-    /*------------------------ Main ----------------------------*/
+    /*------------------------- Main ----------------------------*/
 
     public static void main(String[] args){
 	Sarray sry = new Sarray(1);
