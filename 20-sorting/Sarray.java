@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class Sarray {
     String[] data;
     int last;
@@ -49,7 +52,7 @@ public class Sarray {
 	    data[last] = s;
 	}
 	else{
-	    String[] newdata = new String[data.length + 1];
+	    String[] newdata = new String[data.length + 10];
 	    for(int j = 0 ; j < data.length ; j++){
 		newdata[j] = data[j];
 	    }
@@ -74,7 +77,7 @@ public class Sarray {
 	}
 	
 	else{
-	    String[] newdata = new String[data.length + 1];
+	    String[] newdata = new String[data.length + 10];
 	    for(int k = 0 ; k < index ; k++){
 		newdata[k] = data[k];
 	    }
@@ -123,7 +126,11 @@ public class Sarray {
 
 
 
+<<<<<<< HEAD
     /*------------------------ Isort --------------------------*/
+=======
+    /*----------------------- Insertion Sort -------------------------*/
+>>>>>>> 6b72ea25fe8f6dfd91443db3a8900c6003d6057f
     
     /*
       I used all the same variables that were posted on the HW page.
@@ -132,40 +139,87 @@ public class Sarray {
       our "sorted" and "unsorted" portions of the array, and another to
       execute the "shift until it fits" routine.
       
-      This repeats the "shift until it fits" [rocess for larger and
+      This repeats the "shift until it fits" process for larger and
       larger portions of the array until we encompass the whole array.
     */
     
     public void isort(){
-	int last = 0;
-	while(last < data.length - 1){
+	int divider = 0;
+	while(divider < last){
 	    
 	    int i;
-	    String newvalue = data[last+1];
-	    for(i = last; i > 0 && (newvalue.compareTo(data[i-1]) < 0) ; i--){
+	    String newvalue = data[divider];
+	    for(i = divider; i > 0 && (newvalue.compareTo(data[i-1]) < 0) ; i--){
 		data[i] = data[i-1];    
 	    }
 	    data[i] = newvalue;
 	    
-	    last++;
+	    divider++;
+	}
+    }
+
+<<<<<<< HEAD
+    /*------------------------- Main ----------------------------*/
+=======
+    /*------------------------ Selection Sort -------------------------*/
+
+    /*
+      Time for ssort of 100000 = 37 s
+      Time for ssort of 200000 = 2m 52 s
+    */
+
+    public void ssort(){
+	for(int i = 0 ; i < last ; i++){
+	    String oldval = data[i];
+	    int indexOfSmallestSoFar = i;
+	    for(int j = i ; j < last ; j++){
+		if(data[indexOfSmallestSoFar].compareTo(data[j]) > 0){
+		    indexOfSmallestSoFar = j;
+		}
+	    }
+	    data[i] = data[indexOfSmallestSoFar];
+	    data[indexOfSmallestSoFar] = oldval;
 	}
     }
     
-
-    /*------------------------- Main ----------------------------*/
+    /*------------------------ Main ----------------------------*/
+>>>>>>> 6b72ea25fe8f6dfd91443db3a8900c6003d6057f
 
     public static void main(String[] args){
+	int len = 0;
+	try{    
+	    if(args[0] != null){
+		len = Integer.parseInt(args[0]);
+	    }
+	}catch (IndexOutOfBoundsException e){
+	    System.out.println("Please enter the length of the sarray you wish to create and sort.");
+	    System.exit(0);
+	}
+
+	//Initialize it with length = 1, then while loop fills it to length len
 	Sarray sry = new Sarray(1);
 	
-	for(int i = 10 ; i > 0 ; i--){
+	while(len > 0){
 	    //Creates strings with different values using minimal code :D
-	    sry.add("Hello"+i);
+	    sry.add("Hello"+len);
+	    len--;
 	}
-	System.out.println(sry.toString());
-	sry.isort();
-	System.out.println(sry.toString());
+	
+	//System.out.println(sry.toString());
+	
+	//sry.isort();
+	
 	//And this does, in fact, order the strings properly.
 	//Not sure why the last string, "Hello10", gets cut off.
+	
+	sry.ssort();
+	
+	//Once again, orders the strings properly.
+	//Both of these order them in a pecuilar way, however, at 
+	//least by "normal" standards. Apparently, 1<10<11<12<2<20<3<7.
+
+	//System.out.println(sry.toString());
+	
     }
 
 }
