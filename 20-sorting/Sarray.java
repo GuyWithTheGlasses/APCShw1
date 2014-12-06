@@ -126,11 +126,7 @@ public class Sarray {
 
 
 
-<<<<<<< HEAD
-    /*------------------------ Isort --------------------------*/
-=======
     /*----------------------- Insertion Sort -------------------------*/
->>>>>>> 6b72ea25fe8f6dfd91443db3a8900c6003d6057f
     
     /*
       I used all the same variables that were posted on the HW page.
@@ -158,9 +154,6 @@ public class Sarray {
 	}
     }
 
-<<<<<<< HEAD
-    /*------------------------- Main ----------------------------*/
-=======
     /*------------------------ Selection Sort -------------------------*/
 
     /*
@@ -183,7 +176,6 @@ public class Sarray {
     }
     
     /*------------------------ Main ----------------------------*/
->>>>>>> 6b72ea25fe8f6dfd91443db3a8900c6003d6057f
 
     public static void main(String[] args){
 	int len = 0;
