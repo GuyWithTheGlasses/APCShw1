@@ -138,6 +138,12 @@ public class Sarray {
       This repeats the "shift until it fits" process for larger and
       larger portions of the array until we encompass the whole array.
     */
+
+    /*
+      Time for isort of 100000 = 42 s
+      Time for isort of 200000 = 1 m 30 s
+      Time for isort of 400000 = 8 m 24 s
+    */
     
     public void isort(){
 	int divider = 0;
@@ -157,14 +163,20 @@ public class Sarray {
     /*------------------------ Selection Sort -------------------------*/
 
     /*
-      Time for ssort of 100000 = 37 s
-      Time for ssort of 200000 = 2m 52 s
+      Time for ssort of 100000 = 51 s
+      Time for ssort of 200000 = 3 m 49 s
+      Time for ssort of 400000 = 19 m 16 s
     */
 
     public void ssort(){
+	//This loop checks our progress as we move the smallest 
+	//elements to the front of the sarray 1 by 1.
 	for(int i = 0 ; i < last ; i++){
 	    String oldval = data[i];
 	    int indexOfSmallestSoFar = i;
+	    
+	    //This one finds the smallest element in the rest of  
+	    //the sarray and swap it with the first one.
 	    for(int j = i ; j < last ; j++){
 		if(data[indexOfSmallestSoFar].compareTo(data[j]) > 0){
 		    indexOfSmallestSoFar = j;
@@ -174,19 +186,64 @@ public class Sarray {
 	    data[indexOfSmallestSoFar] = oldval;
 	}
     }
+
+    /*-------------------------- Bubble Sort ---------------------------*/
+
+    /*
+      Time for bsort of 100000 = 2 m 36 s
+      Time for bsort of 200000 = 10 m 20 s
+      Time for bsort of 400000 = 38 m 43 s
+    */
+    
+    public void bsort(){
+	boolean inOrder = false;
+	
+	//While the sarray is still out of order, we must iterate again.
+	while(! inOrder){
+	    
+	    //This is here to check if the sarray is in order yet.
+	    //If a swap is made, it becomes nonzero.
+	    int numOfSwaps = 0;
+	    
+	    //This loop iterates through the enitre array and
+	    //performs all necessary swaps.
+	    for(int i = 0 ; i < last - 1 ; i++){
+		String first = data[i];
+		String second = data[i+1];
+		int comparison = first.compareTo(second);
+		if(comparison > 0){
+		    data[i] = second;
+		    data[i+1] = first;
+		    numOfSwaps++;
+		}
+	    }
+	    
+	    //And if the number of swaps remains 0, then we are
+	    //done sorting, and the loop exits.
+	    if(numOfSwaps == 0){
+		inOrder = true;
+	    }
+	}		
+    }
     
     /*------------------------ Main ----------------------------*/
 
     public static void main(String[] args){
-	int len = 0;
-	try{    
-	    if(args[0] != null){
-		len = Integer.parseInt(args[0]);
-	    }
-	}catch (IndexOutOfBoundsException e){
-	    System.out.println("Please enter the length of the sarray you wish to create and sort.");
-	    System.exit(0);
-	}
+	int len = 400000;
+
+	/* Windows doesn't accept the parameter in Power Shell when 
+	   you try to time it :(
+	   
+	   try{    
+	   if(args[0] != null){
+	   len = Integer.parseInt(args[0]);
+	   }
+	   }catch (IndexOutOfBoundsException e){
+	   System.out.println("Please enter the length of the sarray you wish to create and sort.");
+	   System.exit(0);
+	   }
+	
+	*/
 
 	//Initialize it with length = 1, then while loop fills it to length len
 	Sarray sry = new Sarray(1);
@@ -196,21 +253,28 @@ public class Sarray {
 	    sry.add("Hello"+len);
 	    len--;
 	}
-	
 	//System.out.println(sry.toString());
-	
+
 	//sry.isort();
 	
 	//And this does, in fact, order the strings properly.
 	//Not sure why the last string, "Hello10", gets cut off.
 	
-	sry.ssort();
+
+	//sry.ssort();
 	
 	//Once again, orders the strings properly.
 	//Both of these order them in a pecuilar way, however, at 
 	//least by "normal" standards. Apparently, 1<10<11<12<2<20<3<7.
 
+	sry.bsort();
+	
+	//This works properly, again. 
+	//With Java's quirky ordering, of course.
+
 	//System.out.println(sry.toString());
+
+
 	
     }
 
