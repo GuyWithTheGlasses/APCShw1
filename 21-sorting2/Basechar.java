@@ -10,7 +10,15 @@ public abstract class Basechar implements Comparable{
     private Weapon wielded;
     private Weapon quivered;
     private Armor wearing;
-   
+
+    /*------------------------ Comparable ------------------------*/
+
+    public int compareTo(Object other){
+	Basechar bc = (Basechar)other;
+	return (this.name).compareTo(bc.getName());
+    }
+
+    /*---------------------- Constructors ------------------------*/   
 
     public Basechar(String charName, String wieldedID, String quiveredID, String wearingID) {
 	name = charName;
@@ -69,6 +77,8 @@ public abstract class Basechar implements Comparable{
 	wearing = new Armor();
     }
 	
+    /*----------------------- Getting Stuff ----------------------*/
+
     public String getName(){
 	return name;
     }
@@ -88,7 +98,71 @@ public abstract class Basechar implements Comparable{
     public String getWearing() {
 	return wearing.getID();
     }
+
+    public int getHP() {
+	return HP;
+    }
+
+    public int getPE(){
+	return PE;
+    }
+
+    public int getAtk(boolean yesRange){ 
+	//yesRange true adds quivered attack, otherwise add weilded attack
+    	if (yesRange) {
+	    return Atk + quivered.getExtraAtk(); 
+	    // quivered weapon adds ranged attack!!
+        }
+	else {
+	    return Atk + wielded.getExtraAtk(); 
+	    // wielded weapon adds attack!!
+	}
+    }       
+
+    public int getDef(){
+	return Def + wearing.getExtraDef(); // Armor adds defense!!
+    }
+
+    public int getMAtk() {
+	return MAtk;
+    }
+
+    public int getMDef() {
+	return MDef + wearing.getExtraMDef();
+    }
 	
+    public int getStamina() {
+	return Stamina;
+    }
+
+    public int getConst() {
+	return Const;
+    }
+
+    // Added a getLv to use in MageEncounter
+    public int getLv(){
+	return Lv;
+    }
+
+    public int getRange(boolean yesRange){ 
+	//yesRange true adds quivered attack, otherwise add wielded attack
+	if (yesRange) {
+	    return range + quivered.getExtraRange(); 
+	    // quivered weapon adds ranged attack!!
+	}
+	else {
+	    return Atk + wielded.getExtraRange(); 
+	    // wielded weapon adds attack!!
+	}
+    }
+
+    public double getAccuracy(){
+	return accuracy;
+    }
+
+
+    /*------------------------- Setting Stuff ---------------------------*/
+
     public void setWielded(String ID) {
 	wielded = new Weapon(ID);
     }
@@ -101,79 +175,36 @@ public abstract class Basechar implements Comparable{
 	wearing = new Armor(ID);
     }
 
-    public int getHP() {
-	return HP;
-    }
-
     public void setHP(int newHP) {
 	HP = newHP;
-    }
-    
-    public int getPE(){
-	return PE;
     }
 
     public void setPE(int newPE) {
 	PE = newPE;
-    }
-
-    public int getAtk(boolean yesRange){ // yesRange true adds quivered attack, otherwise add weilded attack
-    	if (yesRange) {
-	    return Atk + quivered.getExtraAtk(); // quivered weapon adds ranged attack!!
-        }
-	else {
-	    return Atk + wielded.getExtraAtk(); // wielded weapon adds attack!!
-	}
     }
         
     public void setAtk(int newAtk) {
 	Atk = newAtk;
     }
 
-    public int getDef(){
-	return Def + wearing.getExtraDef(); // Armor adds defense!!
-    }
-
     public void setDef(int newDef) {
 	Def = newDef;
-    }
-	
-    public int getMAtk() {
-	return MAtk;
     }
 
     public void setMAtk(int newMAtk) {
 	MAtk = newMAtk;
     }
-	
-    public int getMDef() {
-	return MDef + wearing.getExtraMDef();
-    }
-
+	 
     public void setMDef(int newMDef) {
 	MDef = newMDef;
-    }
-	
-    public int getStamina() {
-	return Stamina;
     }
 
     public void setStamina(int newStamina) {
 	Stamina = newStamina;
     }
 
-    public int getConst() {
-	return Const;
-    }
-	
     public void setConst(int newConst) {
 	Const = newConst;
-    }
-
-    // Added a getLv to use in MageEncounter
-
-    public int getLv(){
-	return Lv;
     }
 
     public void setLv(int newLv) {
@@ -187,27 +218,16 @@ public abstract class Basechar implements Comparable{
     public void setSight(int newSight) {
 	sight = newSight;
     }
-	
-    public int getRange(boolean yesRange){ // yesRange true adds quivered attack, otherwise add weilded attack
-	if (yesRange) {
-	    return range + quivered.getExtraRange(); // quivered weapon adds ranged attack!!
-	}
-	else {
-	    return Atk + wielded.getExtraRange(); // wielded weapon adds attack!!
-	}
-    }
 
     public void setRange(int newRange) {
 	range = newRange;
     }
 
-    public double getAccuracy(){
-	return accuracy;
-    }
-
     public void setAccuracy(int newAccuracy) {
 	accuracy = newAccuracy;
     }
+
+    /*---------------------- Methods -------------------------*/
 
     public abstract void attack (Basechar other);
 
@@ -258,4 +278,15 @@ public abstract class Basechar implements Comparable{
 	    System.out.println("okay see ya!");
 	}
     }
+
+    public static void main(String[] args){
+	Basechar[] bca = new Basechar[10];
+	for(int i = 0 ; i < bca.length ; i++){
+	    bca[bca.length - i - 1] = new Akholyte("Kevin"+i);
+	}
+	System.out.println(Arrays.toString(bca));
+	Arrays.sort(bca);
+	System.out.println(Arrays.toString(bca));
+    }
+
 }
