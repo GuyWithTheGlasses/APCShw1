@@ -11,14 +11,14 @@ public abstract class Basechar implements Comparable{
     private Weapon quivered;
     private Armor wearing;
 
-    /*------------------------ Comparable ------------------------*/
+    /*-------------------------- Comparable ---------------------------*/
 
     public int compareTo(Object other){
 	Basechar bc = (Basechar)other;
 	return (this.name).compareTo(bc.getName());
     }
 
-    /*---------------------- Constructors ------------------------*/   
+    /*------------------------ Constructors ---------------------------*/   
 
     public Basechar(String charName, String wieldedID, String quiveredID, String wearingID) {
 	name = charName;
@@ -77,7 +77,7 @@ public abstract class Basechar implements Comparable{
 	wearing = new Armor();
     }
 	
-    /*----------------------- Getting Stuff ----------------------*/
+    /*------------------------ Getting Stuff ------------------------*/
 
     public String getName(){
 	return name;
@@ -160,7 +160,6 @@ public abstract class Basechar implements Comparable{
 	return accuracy;
     }
 
-
     /*------------------------- Setting Stuff ---------------------------*/
 
     public void setWielded(String ID) {
@@ -227,16 +226,13 @@ public abstract class Basechar implements Comparable{
 	accuracy = newAccuracy;
     }
 
-    /*---------------------- Methods -------------------------*/
+    /*------------------------- Methods ----------------------------*/
 
     public abstract void attack (Basechar other);
 
     public boolean toHit(double modifier) {
-
 	Random r = new Random();
-
 	return r.nextDouble() < (accuracy * modifier);
-	
     }
 	
     public void die() {
@@ -279,6 +275,8 @@ public abstract class Basechar implements Comparable{
 	}
     }
 
+    /*--------------------------- Main -----------------------------*/
+    
     public static void main(String[] args){
 	Basechar[] bca = new Basechar[10];
 	for(int i = 0 ; i < bca.length ; i++){
