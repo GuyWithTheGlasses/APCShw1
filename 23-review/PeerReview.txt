@@ -1,0 +1,39 @@
+https://github.com/jbaum98/stuytorrent
+Took care of LoopThread, Client, Receiver, and Sender, as they all extend LoopThread in some way.
+
+LoopThread.java, line 9,24
+protected abstract void vs. abstract protected void?
+
+LoopThread.java, line 16
+synchronized (this)
+Is this also a loop? I don't know really.
+"this" isn't a boolean or anything, so I assume it only runs once?
+Yet it opens brackets.
+
+LoopThread.java, line 13
+Runs while the thread is not interrupted right?
+In the other classes the methods task() and cleanup() throw exceptions, right? Does it throw the exception right after running once?
+And what would cause that while loop to stop running? Because task() and cleanup() don't change the isInterrupted() method, do they?
+So the loop only breaks when exceptions are thrown by task() or cleanup()?
+
+Client.java, line 34
+When would there be commonly be an error in opening a listening port?
+Or is it only there for safety purposes?
+Upon looking at your other methods, it appears that you've included try-catch for most of them regardless.
+
+Client.java, line 44
+The start() method is a part of thread, then? But you don't import thread at the top. So is thread built-in but we just never covered it in class?
+
+Client.java, line 70,76
+for (Peer peer : peers)
+This confuses me a lot. If anything, give me some clearer names at least
+so I can figure out what this means.
+
+Client.java, line 99
+Again, when does peer = null? 
+Or is it safety purposes again...?
+
+Sender.java, line 14,22,31
+The LinkedBlockingQueue works like a buffer, as you said.
+So the take() method takes from the end, and the offer() method
+adds to the beginning? And offer() returns true if it succeeds?
